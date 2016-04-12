@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>TBD</title>
+
+	<!--/*/ <th:block th:include="fragments/headinc :: head"></th:block> /*/-->
+
+</head>
+<body>
+	<div class="container">
+	
+	  <h1 th:text="'Hello, ' + ${user.fullname} + '!'" />
+	  <p>Manage your journals here</p>
+
+	<a th:href="@{/journal}" class="btn btn-primary" role="button">Upload Journal</a>
+	<a th:href="@{/logout}" class="btn btn-link" role="button">Logout</a>
+	<div th:if="${not #lists.isEmpty(journals)}">
+        <table class="table">
+    <thead>
+      <tr>
+        <th>Subject</th>
+        <th>Filename</th>
+        <th>Tags</th>
+        <th>Action</th>
+      </tr>
+    </thead>        
+    <tbody>
+            <tr th:each="journal : ${journals}">
+                <td th:text="${journal.subject}"><a href="/product/${product.id}">Id</a></td>
+                <td th:text="${journal.filename}">Product Id</td>
+                <td th:text="${journal.tags}">Description</td>
+                <td><a th:href="${ '/journal/' + journal.id}">View</a></td>
+            </tr>
+    </tbody>
+
+        </table>
+
+    </div>	  
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>TBD</title>
+
+	<!--/*/ <th:block th:include="fragments/headinc :: head"></th:block> /*/-->
+
+</head>
+<body>
+	<div class="container">
+	
+	  <h1>Hello!</h1>
+	  <p>Welcome to Journal Publication, please login or register before using our service</p>
+	  <div class="row">
+	    <div class="col-sm-6">
+		   	<h2>Login</h2>
+			<form role="form" id="form-login" th:action="@{/login}" method="post">
+			  <div class="form-group">
+			    <label for="email">Email:</label>
+			    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"></input>
+			  </div>
+			  <div class="form-group">
+			    <label for="pwd">Password:</label>
+			    <input type="password" class="form-control" id="pwd" name="password" placeholder="Enter password"></input>
+			  </div>
+			  <div class="form-group">
+			    <label for="type">Type:</label>
+			    <select id="type" name="type">
+			    	<option value="pub">Publisher</option>
+			    	<option value="sub">Subscriber</option>
+			    </select>
+			  </div>		  
+			  <button type="submit" class="btn btn-default">Submit</button>
+			</form>
+	    </div>
+	    <div class="col-sm-6">
+	    	<h2>Signup</h2>
+			<form role="form" id="form-signup" th:action="@{/register}" method="post">
+			  <div class="form-group">
+			    <label for="fullname">Fullname:</label>
+			    <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Enter fullname"></input>
+			  </div>
+			  <div class="form-group">
+			    <label for="email">Email:</label>
+			    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"></input>
+			  </div>
+			  <div class="form-group">
+			    <label for="pwd">Password:</label>
+			    <input type="password" class="form-control" id="pwd" name="password" placeholder="Enter password"></input>
+			  </div>
+			  <div class="form-group">
+			    <label for="type">Type:</label>
+			    <select id="type" name="type">
+			    	<option value="pub">Publisher</option>
+			    	<option value="sub">Subscriber</option>
+			    </select>
+			  </div>
+			  <button type="submit" class="btn btn-default">Submit</button>
+			</form>    
+	    </div>
+	  </div>
+	
+	</div>
+</body>
+</html>

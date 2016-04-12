@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>TBD</title>
+
+	<!--/*/ <th:block th:include="fragments/headinc :: head"></th:block> /*/-->
+
+</head>
+<body>
+	<div class="container">
+	
+	  <h1 th:text="'Hello, ' + ${user.fullname} + '!'" />
+	  <p>Manage your subscriptions here</p>
+
+<form role="form" id="form-search" class="form-inline" th:action="@{/subscriptions}" method="get">
+	<input type="text" class="form-control" id="filter" name="filter" placeholder="Enter filter"></input>
+	<button type="submit" class="btn btn-default">
+		<span class="glyphicon glyphicon-search"></span> Search
+    </button>	
+	
+	<a th:href="@{/logout}" class="btn btn-link" role="button">Logout</a>
+</form>
+	<div th:if="${not #lists.isEmpty(journals)}">
+<form role="form" id="form-subscribe" th:action="@{/subscribe}" method="post">
+	<input type="hidden" name="journalId" id="journalId" /> 
+</form>	
+	<table class="table">
+    <thead>
+      <tr>
+        <th>Subject</th>
+        <th>Filename</th>
+        <th>Tags</th>
+        <th>Action</th>
+      </tr>
+    </thead>        
+    <tbody>
+            <tr th:each="journal : ${journals}">
+                <td th:text="${journal.subject}"><a href="/product/${product.id}">Id</a></td>
+                <td th:text="${journal.filename}">Product Id</td>
+                <td th:text="${journal.tags}">Description</td>
+                <td><a th:href="'javascript:subscribe(\'' + ${journal.id} + '\');'">Subscribe</a></td>
+            </tr>
+    </tbody>
+
+	</table>
+    </div>
+	</div>
+</body>
+<script type="text/javascript">
+function subscribe(journalId) {
+	$('#journalId').val(journalId);
+	$('#form-subscribe').submit();
+}
+$(document).ready(function() {
+	//
+});
+</script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>TBD</title>
+
+	<!--/*/ <th:block th:include="fragments/headinc :: head"></th:block> /*/-->
+
+</head>
+<body>
+	<div class="container">
+
+	<h1 th:text="'Hello, ' + ${user.fullname} + '!'" />
+	<p>Complete below to upload Journal</p>
+
+	<div>
+
+		<form role="form" th:object="${journal}" th:action="@{/journal}" enctype="multipart/form-data" method="post">
+		  <div class="form-group">
+		    <label for="subject">Subject:</label>
+		    <input type="text" class="form-control" th:field="*{subject}" placeholder="Enter subject"/>
+		  </div>
+		  <div class="form-group">
+		    <label for="tags">Tags:</label>
+		    <input type="text" class="form-control" th:field="*{tags}" placeholder="Enter tag(s)"/>
+		  </div>
+		  <div class="form-group">
+		    <label for="file">File (to upload):</label>
+		    <input type="file" name="journalfile"/>
+		  </div>
+		  <button type="submit" class="btn btn-default">Submit</button>
+		  <a th:href="@{/journals}" class="btn btn-default" role="button">Cancel</a>
+		</form>
+    </div> 
+
+	</div>
+</body>
+</html>

@@ -5,4 +5,5 @@ import com.journalpublication.domain.Account;
 public interface ProfileService {
 	Account register(Account account);
 	Account authenticate(String email, String password, String type);
+	Account authenticateApi(String email, String password, String apiKey);
 }

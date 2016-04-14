@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.journalpublication.domain.Account;
 import com.journalpublication.domain.Journal;
 import com.journalpublication.domain.Subscription;
+import com.journalpublication.repositories.AccountRepository;
 import com.journalpublication.repositories.JournalRepository;
 import com.journalpublication.repositories.SubscriptionRepository;
 
@@ -20,9 +21,17 @@ public class SubscriberServiceImpl implements SubscriberService {
 	@Autowired
 	private JournalRepository journalRepository;
 	
+	@Autowired
+	private AccountRepository accountRepository;
+	
 	@Override
 	public ArrayList<Subscription> getSubscribedJournalsForSubscriber(Account subscriber) {
 
+		// does subscriber has email?
+		if (subscriber.getEmail() != null) {
+			subscriber = accountRepository.findOneByEmailAndTypeIgnoreCase(subscriber.getEmail(), subscriber.getType());
+		}
+		
 		return this.subscriptionRepository.findByUserId(subscriber.getId());
 	}
 

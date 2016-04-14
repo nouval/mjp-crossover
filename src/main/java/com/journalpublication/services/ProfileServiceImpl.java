@@ -5,17 +5,18 @@ import org.springframework.stereotype.Service;
 
 import com.journalpublication.Password;
 import com.journalpublication.domain.Account;
+import com.journalpublication.domain.ApiCredential;
 import com.journalpublication.repositories.AccountRepository;
+import com.journalpublication.repositories.ApiCredentialRepository;
 
 @Service
 public class ProfileServiceImpl implements ProfileService {
 
-	private AccountRepository accountRepository;
-	
 	@Autowired
-	public void setAccountRepository(AccountRepository accountRepository) {
-		this.accountRepository = accountRepository;
-	}
+	private AccountRepository accountRepository;
+
+	@Autowired
+	private ApiCredentialRepository apiCredentialRepository; 
 	
 	@Override
 	public Account register(Account account) {
@@ -42,5 +43,23 @@ public class ProfileServiceImpl implements ProfileService {
 		Password passwd = new Password(account.getSalt());
 
 		return passwd.validatePassword(account.getPassword(), password) ? account : null;
+	}
+
+	@Override
+	public Account authenticateApi(String email, String password, String apiKey) {
+		
+		try {
+			// find type, via apiKey
+			ApiCredential apiCred = apiCredentialRepository.findOneByApiKey(apiKey);
+			
+			if (apiCred != null) {
+
+				return this.authenticate(email, password, apiCred.getAccountType());
+			}			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return null;
 	}
 }

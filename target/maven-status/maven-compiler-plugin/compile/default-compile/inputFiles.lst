@@ -1,9 +1,9 @@
 /Users/nouval/git/mjp-crossover/src/main/java/com/journalpublication/configuration/SecurityConfiguration.java
+/Users/nouval/git/mjp-crossover/src/main/java/com/journalpublication/domain/ApiCredential.java
 /Users/nouval/git/mjp-crossover/src/main/java/com/journalpublication/domain/Subscription.java
 /Users/nouval/git/mjp-crossover/src/main/java/com/journalpublication/services/SubscriberServiceImpl.java
 /Users/nouval/git/mjp-crossover/src/main/java/com/journalpublication/controllers/SubscriptionController.java
 /Users/nouval/git/mjp-crossover/src/main/java/com/journalpublication/services/ProfileService.java
-/Users/nouval/git/mjp-crossover/src/main/java/com/journalpublication/controllers/LoginApiController.java
 /Users/nouval/git/mjp-crossover/src/main/java/com/journalpublication/Password.java
 /Users/nouval/git/mjp-crossover/src/main/java/com/journalpublication/controllers/JournalController.java
 /Users/nouval/git/mjp-crossover/src/main/java/com/journalpublication/domain/Journal.java
@@ -17,6 +17,7 @@
 /Users/nouval/git/mjp-crossover/src/main/java/com/journalpublication/services/ProfileServiceImpl.java
 /Users/nouval/git/mjp-crossover/src/main/java/com/journalpublication/configuration/RepositoryConfiguration.java
 /Users/nouval/git/mjp-crossover/src/main/java/com/journalpublication/configuration/WebConfiguration.java
+/Users/nouval/git/mjp-crossover/src/main/java/com/journalpublication/repositories/ApiCredentialRepository.java
 /Users/nouval/git/mjp-crossover/src/main/java/com/journalpublication/controllers/SubscriptionApiController.java
 /Users/nouval/git/mjp-crossover/src/main/java/com/journalpublication/repositories/JournalRepository.java
 /Users/nouval/git/mjp-crossover/src/main/java/com/journalpublication/domain/Account.java

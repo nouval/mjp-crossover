@@ -7,8 +7,10 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import com.journalpublication.domain.Account;
+import com.journalpublication.domain.ApiCredential;
 import com.journalpublication.domain.Journal;
 import com.journalpublication.repositories.AccountRepository;
+import com.journalpublication.repositories.ApiCredentialRepository;
 import com.journalpublication.repositories.JournalRepository;
 
 @Component
@@ -19,6 +21,9 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 	
 	@Autowired
 	private JournalRepository journalRepository;
+	
+	@Autowired
+	private ApiCredentialRepository apiCredentialRepository;
 	
 	private Logger log = Logger.getLogger(DataLoader.class);
 	
@@ -81,6 +86,12 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
 		this.accountRepository.save(user);
 
-		log.info("Saved User - id: " + user.getId());		
+		log.info("Saved User - id: " + user.getId());
+		
+		ApiCredential apiCred = new ApiCredential();
+		apiCred.setApiKey("N2ZkNjQwY2ItZGE4ZC00NjBmLThjODQtMzhkZjMyM2Q2YTFl");
+		apiCred.setAccountType("sub");
+		
+		this.apiCredentialRepository.save(apiCred);
 	}
 }

@@ -24,13 +24,13 @@ public class SubscriptionApiController {
 
     @RequestMapping(value = "/api/subscriptions", method = RequestMethod.GET)
     ArrayList<Journal> list() {
+    	
+    	ArrayList<Journal> journals = new ArrayList<Journal>();
 
 //    	JournalToken token = (JournalToken)SecurityContextHolder.getContext().getAuthentication();
 //    	Account user = (Account)token.getCredentials();
 //    	model.addAttribute("user", user);
     	
-    	ArrayList<Journal> journals = new ArrayList<Journal>();
-
     	Account subscriber = new Account();
     	subscriber.setId(3);
     	ArrayList<Subscription> subscriptions = this.subscriberService.getSubscribedJournalsForSubscriber(subscriber);

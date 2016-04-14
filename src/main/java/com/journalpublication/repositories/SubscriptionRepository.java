@@ -10,5 +10,5 @@ import com.journalpublication.domain.Subscription;
 public interface SubscriptionRepository extends CrudRepository<Subscription, Integer> {
 
 	// findOne by email & type
-	ArrayList<Journal> findByUserId(Integer userId);
+	ArrayList<Subscription> findByUserId(Integer userId);
 }

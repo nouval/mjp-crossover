@@ -21,9 +21,9 @@ public class SubscriberServiceImpl implements SubscriberService {
 	private JournalRepository journalRepository;
 	
 	@Override
-	public ArrayList<Journal> getSubscribedJournalsForSubscriber(Account subscriber) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Subscription> getSubscribedJournalsForSubscriber(Account subscriber) {
+
+		return this.subscriptionRepository.findByUserId(subscriber.getId());
 	}
 
 	@Override
@@ -52,6 +52,12 @@ public class SubscriberServiceImpl implements SubscriberService {
 	public ArrayList<Journal> findJournalByCriteria(Integer journalId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Journal findJournalById(Integer journalId) {
+
+		return this.journalRepository.findOne(journalId);
 	}
 
 }

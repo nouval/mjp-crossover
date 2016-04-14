@@ -12,7 +12,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		httpSecurity
 			.authorizeRequests()
-				.antMatchers("/resources/**", "/webjars/**", "/index", "/register", "/login").permitAll()
+				.antMatchers("/resources/**", "/webjars/**", "/index", "/register", "/login", "/api/**").permitAll()
 				.antMatchers("/console/**").permitAll()
 				.anyRequest().authenticated()
 			.and()

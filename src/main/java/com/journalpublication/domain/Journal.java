@@ -9,6 +9,8 @@ import javax.persistence.Lob;
 //import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Journal {
 
@@ -16,6 +18,7 @@ public class Journal {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
+	@JsonIgnore
 	@Version
 	private Integer version;
 
@@ -23,9 +26,11 @@ public class Journal {
 	private String tags;
 	private String filename;
 	
+	@JsonIgnore
 	@Lob
 	private byte[] content;
 	
+	@JsonIgnore
 	private Integer userId;
 	
 //	@ManyToOne(cascade=CascadeType.ALL)

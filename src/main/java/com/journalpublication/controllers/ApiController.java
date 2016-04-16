@@ -8,14 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.journalpublication.Utils;
 import com.journalpublication.domain.Account;
 import com.journalpublication.domain.Journal;
 import com.journalpublication.domain.Subscription;
 import com.journalpublication.model.ApiToken;
+import com.journalpublication.model.JournalContent;
 import com.journalpublication.services.ProfileService;
 import com.journalpublication.services.SubscriberService;
 
@@ -28,7 +32,7 @@ public class ApiController {
 	@Autowired
 	private ProfileService profileService;
 	
-	public static int API_TOKEN_EXPIRY_IN_MINUTES = 2;
+	public static int API_TOKEN_EXPIRY_IN_MINUTES = 10;
 	public static String API_SECRET_KEY_TEMP = "TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2NpbmcgZWxpdC4gSW4gcXVpcy4=";
 
     @RequestMapping(value={"/api/login"}, method = RequestMethod.POST)
@@ -75,6 +79,38 @@ public class ApiController {
     	return subscriber;
     }
 
+    @RequestMapping(value = "/api/journal/{journalId}", method = RequestMethod.GET)
+    JournalContent getJournalViaAPI(@PathVariable Integer journalId, 
+    		HttpServletRequest request, HttpServletResponse response) {
+    	
+    	JournalContent journalWithContent = new JournalContent();
+    	Account subscriber = new Account();
+    	String jwToken = request.getHeader("X-AUTH-TOKEN");
+
+    	if (!this.validateJWT(jwToken, subscriber)) {
+    		try {
+				response.sendError(401);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+    	} else {
+    		
+    		Journal journal = this.subscriberService.findJournalById(journalId);
+    		journalWithContent.setFilename(journal.getFilename());
+    		// journalWithContent.setContent(journal.getContent());
+    		try {
+				journalWithContent.setContent(Utils.convertPdfToImage(journal.getContent()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
+
+    	return journalWithContent;
+    }
+    
     @RequestMapping(value = "/api/subscriptions", method = RequestMethod.GET)
     ArrayList<Journal> list(HttpServletRequest request, HttpServletResponse response) {
     	

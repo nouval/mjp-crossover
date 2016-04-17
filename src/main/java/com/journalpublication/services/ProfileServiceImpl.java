@@ -3,7 +3,7 @@ package com.journalpublication.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.journalpublication.Password;
+import com.journalpublication.Utils;
 import com.journalpublication.domain.Account;
 import com.journalpublication.domain.ApiCredential;
 import com.journalpublication.repositories.AccountRepository;
@@ -23,9 +23,8 @@ public class ProfileServiceImpl implements ProfileService {
 
 		try {
 
-	        Password pwd = new Password();
-	        account.setSalt(pwd.getSalt());
-	        account.setPassword(pwd.hashPasswordAsBase64(account.getPassword()));
+	        account.setSalt(Utils.generateSaltAsBase64());
+	        account.setPassword(Utils.hashPasswordAsBase64(account.getPassword(), Utils.stringToByte(account.getSalt())));
 
 			this.accountRepository.save(account);
 
@@ -40,9 +39,8 @@ public class ProfileServiceImpl implements ProfileService {
 	public Account authenticate(String email, String password, String type) {
 
 		Account account = this.accountRepository.findOneByEmailAndTypeIgnoreCase(email, type);
-		Password passwd = new Password(account.getSalt());
-
-		return passwd.validatePassword(account.getPassword(), password) ? account : null;
+		
+		return Utils.validatePassword(account.getPassword(), account.getSalt(), password) ? account : null;
 	}
 
 	@Override

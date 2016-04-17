@@ -91,12 +91,4 @@ public class Journal {
 	public byte[] getContent() {
 		return this.content;
 	}
-	
-//	public Account getAccount() {
-//		return this.account;
-//	}
-//
-//	public void setAccount(Account account) {
-//		this.account = account;
-//	}
 }

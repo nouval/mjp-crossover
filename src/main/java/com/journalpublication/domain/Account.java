@@ -29,9 +29,6 @@ public class Account {
 	private String type;
 	private String salt;
 
-//	@OneToMany(mappedBy="account")
-//	private Collection<Journal> journals;
-	
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -80,19 +77,19 @@ public class Account {
 		return this.type;
 	}
 	
+	/**
+	 * Sets user's salt to be used to hashed the password
+	 * @param salt
+	 */
 	public void setSalt(String salt) {
 		this.salt = salt;
 	}
 	
+	/**
+	 * Returns user's salt to verify hashed password
+	 * @return
+	 */
 	public String getSalt() {
 		return this.salt;
-	}
-	
-//	public Collection<Journal> getJournals() {
-//		return this.journals;
-//	}
-//
-//    public void setJournals(Collection<Journal> journals) {
-//    	this.journals = journals;
-//    }	
+	}	
 }

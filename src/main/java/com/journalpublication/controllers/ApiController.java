@@ -38,7 +38,8 @@ public class ApiController {
     @RequestMapping(value={"/api/login"}, method = RequestMethod.POST)
     ApiToken login(@RequestParam(value="username") String username,
     		@RequestParam(value="password") String password,
-    		@RequestParam(value="apiKey") String apiKey) {
+    		@RequestParam(value="apiKey") String apiKey, 
+    		HttpServletRequest request, HttpServletResponse response) {
     
     	ApiToken apitoken = new ApiToken(username, null);
     	
@@ -56,6 +57,13 @@ public class ApiController {
     				.compact();
     		apitoken.setUsername(username);
     		apitoken.setToken(jwt);
+    	} else {
+    		try {
+				response.sendError(404);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     	}
 
     	return apitoken;

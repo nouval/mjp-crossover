@@ -6,8 +6,17 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.journalpublication.domain.Subscription;
 
+/**
+ * 
+ * @author nouval
+ *
+ */
 public interface SubscriptionRepository extends CrudRepository<Subscription, Integer> {
 
-	// findOne by email & type
+	/**
+	 * Returns array of Subscribed journals by specific user's id 
+	 * @param userId
+	 * @return
+	 */
 	ArrayList<Subscription> findByUserId(Integer userId);
 }

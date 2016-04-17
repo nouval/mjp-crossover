@@ -7,6 +7,11 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class WebConfiguration {
+	/**
+	 * This bean instructs Spring framework to load and setup H2 (in-memory) database,
+	 * and should be accessible from /console/* uri of base url 
+	 * @return
+	 */
     @Bean
     ServletRegistrationBean h2servletRegistration(){
         ServletRegistrationBean registrationBean = new ServletRegistrationBean( new WebServlet());

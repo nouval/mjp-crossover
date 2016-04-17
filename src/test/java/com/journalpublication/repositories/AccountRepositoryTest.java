@@ -25,6 +25,33 @@ public class AccountRepositoryTest {
 		this.accountRepository = accountRepository;
 	}
 	
+	@Test(expected = org.springframework.dao.DataIntegrityViolationException.class)
+	public void test_SaveAccount_Failed_Duplicate_Email() {
+		// setup account
+		Account accountAbc = new Account();
+		accountAbc.setEmail("test_abc@email.com");
+		accountAbc.setFullname("test abc fullname");
+		accountAbc.setPassword("password");
+		accountAbc.setSalt("salt");
+		accountAbc.setType("pub");
+		
+		// save account, verify has Id
+		assertNull(accountAbc.getId());
+		this.accountRepository.save(accountAbc);
+		assertNotNull(accountAbc.getId());
+
+		Account accountAbcDub = new Account();
+		accountAbcDub.setEmail("test_abc@email.com");
+		accountAbcDub.setFullname("test abc fullname");
+		accountAbcDub.setPassword("password");
+		accountAbcDub.setSalt("salt");
+		accountAbcDub.setType("pub");
+
+		// save account error, duplicate
+		assertNull(accountAbcDub.getId());
+		this.accountRepository.save(accountAbcDub);
+	}
+	
 	@Test
 	public void test_SaveAccount_Success() {
 		// setup account

@@ -12,5 +12,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories(basePackages = {"com.journalpublication.repositories"})
 @EnableTransactionManagement
 public class RepositoryConfiguration {
-	
+	/**
+	 * this class instructs spring framework to load entities and repositories class
+	 * from given package at com.journalpublication.domain & com.journalpublication.repositories
+	 */
 }

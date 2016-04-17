@@ -20,45 +20,7 @@ public class SubscriptionController {
 
 	@Autowired
 	private SubscriberService subscriberService;
-	
-//	@RequestMapping(value = "/subscription", method = RequestMethod.GET)
-//	String journal(Model model) {
-//
-//    	JournalToken token = (JournalToken)SecurityContextHolder.getContext().getAuthentication();
-//    	Account user = (Account)token.getCredentials();
-//    	model.addAttribute("user", user);
-//    	
-//    	Journal journal = new Journal();
-//    	model.addAttribute("journal", journal);
-//		
-//		return "journal";
-//	}
-//
-//	@RequestMapping(value = "/journal", method = RequestMethod.POST)
-//	String journalSave(Journal journal, Model model, @RequestParam("journalfile") MultipartFile file) {
-//
-//    	JournalToken token = (JournalToken)SecurityContextHolder.getContext().getAuthentication();
-//    	Account user = (Account)token.getCredentials();
-//    	model.addAttribute("user", user);
-//    	
-//    	if (!file.isEmpty()) {
-//    		try {
-//    			
-//    			journal.setFilename(file.getOriginalFilename());
-//    			journal.setContent(file.getBytes());
-//    			String pdfHeader = new String(Arrays.copyOf(journal.getContent(), 5), StandardCharsets.UTF_8);
-//    			if (!pdfHeader.equals("%PDF-")) {
-//    				return "journal";
-//    			}
-//    		} catch (IOException ex) {
-//    			return "journal";
-//    		}
-//    	}    	
-//    	this.publisherService.uploadJournalForPublisher(journal, user);
-//
-//    	return "redirect:journals";
-//	}
-	
+
 	@RequestMapping(value = "/subscribe", method = RequestMethod.POST)
 	String subscribe(Model model, @RequestParam("journalId") Integer journalId) {
 

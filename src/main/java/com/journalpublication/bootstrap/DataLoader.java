@@ -9,9 +9,11 @@ import org.springframework.stereotype.Component;
 import com.journalpublication.domain.Account;
 import com.journalpublication.domain.ApiCredential;
 import com.journalpublication.domain.Journal;
+import com.journalpublication.domain.Subscription;
 import com.journalpublication.repositories.AccountRepository;
 import com.journalpublication.repositories.ApiCredentialRepository;
 import com.journalpublication.repositories.JournalRepository;
+import com.journalpublication.repositories.SubscriptionRepository;
 
 @Component
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
@@ -25,8 +27,14 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 	@Autowired
 	private ApiCredentialRepository apiCredentialRepository;
 	
+	@Autowired
+	private SubscriptionRepository subscriptionRepository;
+	
 	private Logger log = Logger.getLogger(DataLoader.class);
 	
+	/**
+	 * Load sets of data into H2 (in-memory) database, works as data seeding purposes
+	 */
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		// TODO Auto-generated method stub
@@ -87,11 +95,17 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 		this.accountRepository.save(user);
 
 		log.info("Saved User - id: " + user.getId());
-		
+
+		Subscription subscription = new Subscription();
+		subscription.setJournalId(journal.getId());
+		subscription.setUserId(user.getId());
+
+		this.subscriptionRepository.save(subscription);
+
 		ApiCredential apiCred = new ApiCredential();
 		apiCred.setApiKey("N2ZkNjQwY2ItZGE4ZC00NjBmLThjODQtMzhkZjMyM2Q2YTFl");
 		apiCred.setAccountType("sub");
-		
+
 		this.apiCredentialRepository.save(apiCred);
 	}
 }

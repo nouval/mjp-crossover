@@ -5,13 +5,21 @@ import org.springframework.security.authentication.AbstractAuthenticationToken;
 public class JournalToken extends AbstractAuthenticationToken {
 
 	/**
-	 * 
+	 * Custom Journal Publication token for session authentication
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/** holds user's email */
 	private Object principal;
+	/** holds user's Account detail */
 	private Object credentials;
 	
+	/**
+	 * Default c'tor
+	 * 
+	 * @param principal
+	 * @param credentials
+	 */
 	public JournalToken(Object principal, Object credentials) {
 		super(null);
 		this.principal = principal;
